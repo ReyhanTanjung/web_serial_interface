@@ -1,3 +1,4 @@
+![Interface Preview.](/assets/image.png)
 # Installation Guide
 ```
 npm install
