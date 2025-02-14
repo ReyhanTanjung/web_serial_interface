@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-time Angle Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"/>
+    <script src="/socket.io/socket.io.js"></script>
+    <script defer src="script.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen ml-32 mr-32">
+    <div class="bg-white p-6 rounded-lg shadow-lg">
+        <!-- COM Port Selection -->
+        <div class="mb-4">
+            <label class="block text-gray-700 font-bold mb-2">Select COM Port:</label>
+            <select id="com-port" class="block appearance-none w-32 bg-white border border-gray-400 px-4 py-2 pr-8 rounded shadow">
+                <option value="def">Select Port</option>
+                <option value="COM1">COM1</option>
+                <option value="COM2">COM2</option>
+                <option value="COM3">COM3</option>
+                <option value="COM4">COM4</option>
+            </select>
+        </div>
+        
+        <div class="flex flex-row">
+            <!-- Left Column (Graph & Angle) -->
+            <div class="w-1/2 mr-4">
+                <div class="bg-gray-200 shadow-md rounded-lg p-4 mb-4 h-70">
+                    <h2 class="text-xl font-bold mb-2">Graph: Angle vs Time</h2>
+                    <canvas id="angleChart" class="bg-white rounded-lg max-h-64"></canvas>
+                </div>
+                <div class="bg-gray-200 rounded-lg p-4 mb-4">
+                    <h2 class="text-xl font-bold mb-2">Angle Illustration</h2>
+                    <div class="bg-white rounded-lg shadow-md">
+                        <img src="tss_ship.png" alt="" class="relative left-36 top-12 max-w-xs z-10">
+                        <hr class="relative border-4 border-blue-200 top-10 z-0">
+                        <canvas id="angleCanvas" class="relative left-60 h-52 z-20"></canvas>
+                        <p class="relative text-center font-semibold text-lg pb-4 -mt-16">Current Angle: <span id="angleValue">0</span>°</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Column (Information, Camera, Controls) -->
+            <div class="w-1/2 ml-4">
+                <div class="bg-gray-200 shadow-md p-4 rounded-lg mb-4">
+                    <h2 class="text-xl font-bold mb-2">Information</h2>
+                    <div class="bg-white p-4 rounded-lg">
+                        <div id="data-stats" class="grid grid-cols-2 gap-2 text-sm">
+                            <div>Total Samples: <span id="total-samples">0</span></div>
+                            <div>Current Angle: <span id="current-angle">0°</span></div>
+                            <div>Recording: <span id="recording-status">No</span></div>
+                            <div>Last Update: <span id="last-update">Never</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-200 p-4 rounded-lg mb-4">
+                    <h2 class="text-xl font-bold mb-2">Camera Feed</h2>
+                    <div class="relative w-full h-80 bg-black rounded-lg flex items-center justify-center">
+                        <video id="camera-feed" class="w-full h-full rounded-lg object-cover" autoplay playsinline></video>
+                        <button id="start-camera" class="absolute bottom-4 right-4 bg-blue-500 text-white px-3 py-1 rounded-lg shadow">Start Camera</button>
+                    </div>
+                </div>
+                
+                <!-- Control Buttons -->
+                <div class="flex space-x-4 justify-center">
+                    <button id="record-btn" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Record Data</button>
+                    <button id="stop-btn" class="bg-red-500 text-white px-4 py-2 rounded-lg" disabled>Stop Record</button>
+                    <button id="import-btn" class="bg-green-500 text-white px-4 py-2 rounded-lg">Import Data</button>
+                    <button id="export-btn" class="bg-yellow-500 text-white px-4 py-2 rounded-lg">Export Data</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

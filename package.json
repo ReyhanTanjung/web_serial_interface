@@ -1,0 +1,15 @@
+{
+  "name": "web_serial_plotter",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.21.2",
+    "serialport": "^13.0.0",
+    "socket.io": "^4.8.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "commonjs",
+  "license": "ISC"
+}
