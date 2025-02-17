@@ -7,10 +7,10 @@ app = Flask(__name__)
 CORS(app)
 
 USERNAME = 'admin'
-PASSWORD = 'admin'
-PORT = '1935'
+PASSWORD = 'Alphaangle'
+PORT = '554'
 current_ip = '192.168.121.159'
-current_rtsp_url = f'rtsp://{USERNAME}:{PASSWORD}@{current_ip}:{PORT}'
+current_rtsp_url = f'rtsp://{USERNAME}:{PASSWORD}@{current_ip}:{PORT}/Streaming/Channels/101'
 camera_thread = None
 frame_buffer = None
 stop_thread = False
@@ -49,7 +49,7 @@ def update_stream():
     if not new_ip:
         return jsonify({'success': False, 'error': 'No IP address provided'})
 
-    new_rtsp_url = f'rtsp://{USERNAME}:{PASSWORD}@{new_ip}:{PORT}'
+    new_rtsp_url = f'rtsp://{USERNAME}:{PASSWORD}@{new_ip}:{PORT}/Streaming/Channels/101'
     if camera_thread and camera_thread.is_alive():
         stop_thread = True
         camera_thread.join()
