@@ -1,6 +1,33 @@
 const ctxChart = document.getElementById('angleChart').getContext('2d');
 const socket = io();
 
+function updateStream() {
+    const ipAddress = document.getElementById('ipInput').value;
+    const statusDiv = document.getElementById('cam-status');
+
+    statusDiv.textContent = 'Connecting...';
+
+    fetch('http://localhost:5000/update_stream', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ip_address: ipAddress })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            statusDiv.textContent = 'Connected successfully';
+            const videoFeed = document.getElementById('videoFeed');
+            videoFeed.src = 'http://localhost:5000/video_feed?' + new Date().getTime();
+        } else {
+            statusDiv.textContent = 'Connection failed: ' + data.error;
+        }
+    })
+    .catch(error => {
+        statusDiv.textContent = 'Error: ' + error;
+    });
+}
+
+
 // Data awal
 const labels = [];
 const dataPoints = [];
