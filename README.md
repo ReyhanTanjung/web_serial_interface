@@ -1,28 +1,20 @@
 ![Interface Preview.](/assets/image.png)
 # Installation Guide
 ## Backend Javascript
+Open the directory in terminal and type:
 ```
 npm install
 ```
-## Backend Python
-```
-cd rtsp_streamer
-python -m venv env
-env\Scripts\activate
-pip install -r requirements.txt
-```
 
 # Usage
-## 1. Open first terminal
+## 1. Backend Javascript
+Open the directory in terminal and type:
 ```
 node .\src\index.js
 ```
-## 2. Open second terminal
-```
-cd rtsp_streamer
-env\Scripts\activate
-python rtsp_viewer.py
-```
+
+## 2. Streamer Handler
+Open dist/rtsp_viewer.exe 
 
 # Web 
 Link : [Localhost at port 3000](http://localhost:3000)   
